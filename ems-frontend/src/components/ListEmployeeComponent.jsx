@@ -1,4 +1,4 @@
-import React, {useEffect, useState} from 'react'
+import React, { useEffect, useState } from 'react'
 import { listEmployees } from '../services/EmployeeService';
 import { useNavigate } from 'react-router-dom';
 
@@ -6,7 +6,7 @@ const ListEmployeeComponent = () => {
 
   const [employees, setEmployees] = useState([]);
 
-  const navigate = useNavigate(); 
+  const navigate = useNavigate();
   useEffect(() => {
     listEmployees().then(response => {
       setEmployees(response.data);
@@ -16,7 +16,7 @@ const ListEmployeeComponent = () => {
   }, [])
 
   function addNewEmployee() {
-    navigate('/add-employee'); 
+    navigate('/add-employee');
   }
 
   return (
@@ -35,15 +35,23 @@ const ListEmployeeComponent = () => {
         </thead>
         <tbody>
           {
-            employees.map(employee =>
-              <tr key={employee.id}>
-                <td>{employee.id}</td>
-                <td>{employee.firstName}</td>
-                <td>{employee.lastName}</td>
-                <td>{employee.email}</td>
-              </tr>)      
+            Array.isArray(employees) && employees.length > 0 ? (
+              employees.map(employee => (
+                <tr key={employee.id}>
+                  <td>{employee.id}</td>
+                  <td>{employee.firstName}</td>
+                  <td>{employee.lastName}</td>
+                  <td>{employee.email}</td>
+                </tr>
+              ))
+            ) : (
+              <tr>
+                <td colSpan="4" style={{ textAlign: "center" }}>
+                  No Record Found Add New One
+                </td>
+              </tr>
+            )
           }
-
         </tbody>
       </table>
     </div>

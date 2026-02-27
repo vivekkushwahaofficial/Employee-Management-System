@@ -1,0 +1,17 @@
+{
+  "version": "0.2.0",
+  "configurations": [
+    {
+      "type": "java",
+      "name": "Debug Spring Boot",
+      "request": "launch",
+      "mainClass": "net.javaguides.ems.EmsBackendApplication",
+      "projectName": "ems-backend",
+      "env": {
+        "DATABASE_URL": "jdbc:postgresql://ep-purple-math-a15lkg06-pooler.ap-southeast-1.aws.neon.tech:5432/neondb?sslmode=require",
+        "DB_USERNAME": "neondb_owner",
+        "DB_PASSWORD": "npg_VrEG2q9NtMlk"
+      }
+    }
+  ]
+}
