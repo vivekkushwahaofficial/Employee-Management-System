@@ -10,11 +10,7 @@ import org.springframework.web.bind.annotation.RestController;
 @RestController
 public class HealthController {
 
-    // Home endpoint
-    @GetMapping("/")
-    public String home() {
-        return "Employee Management System Backend is Running 🚀";
-    }
+
 
     // Health check endpoint
     @GetMapping("/health")
