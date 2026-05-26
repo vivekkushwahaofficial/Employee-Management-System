@@ -57,6 +57,24 @@ employee-management-system
 Backend runs on:
 http://localhost:8080
 
+## 🐳 Docker Setup
+
+Start the whole stack from the repository root:
+
+```bash
+docker compose up --build
+```
+
+Services exposed by compose:
+- Frontend: http://localhost
+- Backend API: http://localhost:8080
+- PostgreSQL: localhost:5432
+
+Container networking details:
+- The frontend is served by Nginx and proxies `/api/*` to the backend container.
+- The backend connects to the `db` container using the service name `db`.
+- Backend database settings are injected through `DATABASE_URL`, `DB_USERNAME`, `DB_PASSWORD`, and `DDL_AUTO`.
+
 ---
 
 ## ⚙️ Frontend Setup
