@@ -55,7 +55,7 @@ employee-management-system
    mvn spring-boot:run
 
 Backend runs on:
-http://localhost:8080
+https://ems-backend-0udc.onrender.com
 
 ---
 
@@ -71,7 +71,7 @@ http://localhost:8080
    npm run dev
 
 Frontend runs on:
-http://localhost:5173
+https://employee-management-system-wnla.vercel.app/
 
 ---
 
