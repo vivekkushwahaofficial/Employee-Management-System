@@ -12,7 +12,7 @@ This application allows users to perform CRUD operations on employees.
 - Spring Boot
 - Spring Data JPA
 - Hibernate
-- MySQL
+- PostgreSQL
 - Maven
 
 ### Frontend
@@ -48,7 +48,7 @@ employee-management-system
 1. Navigate to backend folder:
    cd ems-backend
 
-2. Configure MySQL in:
+2. Configure PostgreSQL in:
    src/main/resources/application.properties
 
 3. Run the application:

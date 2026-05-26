@@ -1,8 +1,11 @@
-import React, { useState } from 'react'
-import { createEmployee } from '../services/EmployeeService';
-import { useNavigate } from 'react-router-dom';
+import React, { useEffect, useState } from 'react'
+import { createEmployee, getEmployeeById, updateEmployee } from '../services/EmployeeService';
+import { useNavigate, useParams } from 'react-router-dom';
 
 const EmployeeComponent = () => {
+
+  const { id } = useParams();
+  const isEditMode = Boolean(id);
 
   const [firstName, setFirstName] = useState('');
   const [lastName, setLastName] = useState('');
@@ -16,17 +19,30 @@ const EmployeeComponent = () => {
 
   const navigate = useNavigate();
 
+  useEffect(() => {
+    if (isEditMode) {
+      getEmployeeById(id).then((response) => {
+        setFirstName(response.data.firstName);
+        setLastName(response.data.lastName);
+        setEmail(response.data.email);
+      }).catch((error) => {
+        console.error(error);
+      });
+    }
+  }, [id, isEditMode]);
+
   function saveEmployee(e) {
     e.preventDefault();
 
     if (validateForm()) {
       const employee = { firstName, lastName, email };
-      console.log(employee);
+      const request = isEditMode ? updateEmployee(id, employee) : createEmployee(employee);
 
-      createEmployee(employee).then(response => {
-        console.log(response.data);
+      request.then(() => {
         navigate('/employees');
-      })
+      }).catch((error) => {
+        console.error(error);
+      });
 
     }
 
@@ -65,7 +81,7 @@ const EmployeeComponent = () => {
       <br /> <br />
       <div className='row'>
         <div className='card col-md-6 offset-md-3 offset-md-3'>
-          <h2 className='text-center'>Add Employee</h2>
+          <h2 className='text-center'>{isEditMode ? 'Update Employee' : 'Add Employee'}</h2>
           <div className='card-body'>
             <form>
               <div className='form-group mb-2'>
@@ -109,7 +125,7 @@ const EmployeeComponent = () => {
                 <div className='invalid-feedback'>{errors.email}</div>
               </div>
 
-              <button className='btn btn-success' onClick={saveEmployee}>Submit</button>
+              <button className='btn btn-success' onClick={saveEmployee}>{isEditMode ? 'Update' : 'Submit'}</button>
             </form>
           </div>
         </div>

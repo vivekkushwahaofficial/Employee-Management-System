@@ -1,0 +1,11 @@
+# IntelliJ
+.idea/
+
+# Logs
+*.log
+
+# Spring Boot
+ems-backend/target/
+
+# Node
+ems-frontend/node_modules/

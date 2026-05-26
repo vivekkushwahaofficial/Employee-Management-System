@@ -1,5 +1,5 @@
 import React, { useEffect, useState } from 'react'
-import { listEmployees } from '../services/EmployeeService';
+import { deleteEmployee, listEmployees } from '../services/EmployeeService';
 import { useNavigate } from 'react-router-dom';
 
 const ListEmployeeComponent = () => {
@@ -19,6 +19,20 @@ const ListEmployeeComponent = () => {
     navigate('/add-employee');
   }
 
+  function updateEmployee(id) {
+    navigate(`/edit-employee/${id}`);
+  }
+
+  function removeEmployee(id) {
+    deleteEmployee(id).then(() => {
+      listEmployees().then(response => {
+        setEmployees(response.data);
+      });
+    }).catch(error => {
+      console.error(error);
+    });
+  }
+
   return (
     <div className="container">
 
@@ -31,6 +45,7 @@ const ListEmployeeComponent = () => {
             <th>Employee First Name</th>
             <th>Employee Last Name</th>
             <th>Employee Email Id</th>
+            <th>Actions</th>
           </tr>
         </thead>
         <tbody>
@@ -42,11 +57,15 @@ const ListEmployeeComponent = () => {
                   <td>{employee.firstName}</td>
                   <td>{employee.lastName}</td>
                   <td>{employee.email}</td>
+                  <td>
+                    <button className='btn btn-info btn-sm me-2' onClick={() => updateEmployee(employee.id)}>Update</button>
+                    <button className='btn btn-danger btn-sm' onClick={() => removeEmployee(employee.id)}>Delete</button>
+                  </td>
                 </tr>
               ))
             ) : (
               <tr>
-                <td colSpan="4" style={{ textAlign: "center" }}>
+                <td colSpan="5" style={{ textAlign: "center" }}>
                   No Record Found Add New One
                 </td>
               </tr>
