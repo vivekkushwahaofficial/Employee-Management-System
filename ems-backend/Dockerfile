@@ -1,18 +1,13 @@
-FROM maven:3.9.9-eclipse-temurin-17 AS build
-
-WORKDIR /workspace
-
-COPY pom.xml ./
-COPY src ./src
-
-RUN mvn -q -DskipTests package
-
-FROM eclipse-temurin:17-jre
+FROM eclipse-temurin:17-jdk
 
 WORKDIR /app
 
-COPY --from=build /workspace/target/ems-backend-0.0.1-SNAPSHOT.jar /app/app.jar
+COPY . .
+
+RUN chmod +x mvnw
+
+RUN ./mvnw clean package -DskipTests
 
 EXPOSE 8080
 
-ENTRYPOINT ["java", "-jar", "/app/app.jar"]
+CMD ["java", "-jar", "target/ems-backend-0.0.1-SNAPSHOT.jar"]
