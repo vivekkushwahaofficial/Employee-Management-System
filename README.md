@@ -1,7 +1,6 @@
 # Employee Management System
 
-A Full Stack Employee Management System built using Spring Boot (Backend) and React (Frontend).  
-This application allows users to perform CRUD operations on employees.
+A Full Stack Employee Management System built using Spring Boot, React, and PostgreSQL with CRUD operations and REST API integration on employees.
 
 ---
 
